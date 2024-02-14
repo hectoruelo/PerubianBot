@@ -1,3 +1,4 @@
+import logging
 from selenium import webdriver
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from datetime import datetime
@@ -16,8 +17,9 @@ import os
 from os import system
 
 version = 'Beta 2.0'
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 global debug
-debug = 0
+debug = 1
 
 system("title " 'PerubianBot '+version)
 
@@ -32,6 +34,7 @@ ______               _     _               _____  _____
 """ + Style.RESET_ALL
 
 menu = ConsoleMenu(Fore.YELLOW + perubian, "Seleccione un modo"+ Style.RESET_ALL)
+
 
 #Firefox Configuration
 def firefoxsetup():
@@ -52,7 +55,8 @@ def firefoxsetup():
 
 #Limpiar Consola
 def clear_console():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    print()
+   # os.system('cls' if os.name == 'nt' else 'clear')
 
 #Formulario Datos
 def pregunta_estilizada(prompt, datos_previos='', email='', validacion=None):
@@ -87,12 +91,13 @@ def validacion_no_vacia(input_str):
 #Formulario
 def formulario():
     global email 
-    prefijos = ('6', '7', '9')
+    datos_persona = ''
+    prefijos = ('6', '8', '7', '9')
     if debug == 1:
+        logging.debug("Modo debug activado.")
         print(perubian)
-        print('DEBUG MODE ON')
         global number, name, surname
-        number, name, surname, email = '666666666', 'NombrePrueba', 'ApellidoPrueba', 'CorreoPrueba@gmail.com'
+        number, name, surname, email = '666666666', 'Piter', 'Grifin', 'uhieor43@gmail.com'
     else:
         datos_persona = ''
         number = pregunta_estilizada('Nº de Teléfono: ')
