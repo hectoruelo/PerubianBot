@@ -168,24 +168,6 @@ def main():
         # Opcional: Extrae y muestra la IP detectada por la página
         ip_address = browser.find_element_by_css_selector('body > div > p').text
         print(ip_address)  # Imprime tu dirección IP según lo detectado por la página
-        
-        #SECURITAS DIRECT
-        if interrupted:
-            break
-        try:
-            browser.get('https://www.securitasdirect.es/')
-            time.sleep(5)
-            browser.find_element_by_xpath('//*[@id="CybotCookiebotDialogBodyLevelButtonLevelOptinAllowAll"]').click() #Cookies
-            time.sleep(1)
-            browser.find_element_by_xpath('//*[@id="edit-telefono1"]').send_keys(number)
-            browser.find_element_by_xpath('//*[@id="edit-submit"]').click()
-            time.sleep(1)
-            if(browser.current_url == 'https://www.securitasdirect.es/error-envio'):
-                print('Securitas Direct: Skipeado (Limite Excedido)')
-            else:
-                print('Securitas Direct: OK')
-        except Exception as e:
-            print('Securitas Direct: Skipeado (ERROR)')
 
         #Vodafone
         if interrupted:
@@ -237,32 +219,6 @@ def main():
         except:
             print('Euroinnova: Skipeado (ERROR)')
 
-        #GENESIS
-        try:
-            if current_time > start and current_time < end:
-                browser.get('https://www.genesis.es/modal/c2c')
-                time.sleep(3)
-                try:
-                    browser.find_element_by_xpath('//*[@id="onetrust-accept-btn-handler"]').click()
-                except:
-                    pass
-                time.sleep(1)
-                browser.find_element_by_xpath('/html/body/div[1]/div/main/div/div/div/article/div/div/div/div/div/form/section/div/div[2]/div/select/option[3]').click()
-                browser.find_element_by_xpath('//*[@id="edit-por-quien-preguntamos-"]').send_keys(name)
-                browser.find_element_by_xpath('//*[@id="edit-phone"]').send_keys(number)
-                browser.find_element_by_xpath('//*[@id="edit-phone-confirmation"]').send_keys(number)
-
-                browser.find_element_by_xpath('//*[@id="edit-actions-submit"]').click()
-                time.sleep(1)
-                print('Genesis: OK')
-            else:
-                print('Genesis: Skipeado (Fuera de Horario)')
-        except KeyboardInterrupt:
-            browser.close()
-            quit()
-        except:
-            print('Genesis: Skipeado (ERROR)')
-
         #Racctel+
         try:
             url = "https://eshop.prod.k8s.masmovil.com/catalog/api/c2c/racctel"
@@ -297,21 +253,6 @@ def main():
             quit()
         except:
             print('Racctel+: Skipeado (ERROR)')
-
-        #JAZZTEL
-        try:
-            browser.get('https://llamamegratis.es/jazztel/v2/webphone.html?lang=es-ES&isLandingLander=1&typeOrigin=wphFollow&widget=3294&wphUrl#https://www.telefonojazztel.es/')
-            time.sleep(1)
-            browser.find_element_by_xpath('//*[@id="phoneNumber"]').send_keys(number)
-            time.sleep(1)
-            browser.find_element_by_xpath('//*[@id="env"]').click()
-            time.sleep(3)
-            print('Jazztel: OK')
-        except KeyboardInterrupt:
-            browser.close()
-            quit()
-        except:
-            print('Jazztel: Skipeado (ERROR)')
 
         #Euskaltel
         try:
@@ -391,29 +332,6 @@ def main():
         except:
             print('Prosegur: Skipeado (ERROR)')
 
-        #LineaDirecta
-        try:
-            browser.get('https://www.lineadirecta.com/te-llamamos-gratis.html?idServicio=http0036&from=B009975&indVehiculo=C')
-            time.sleep(3)
-            try:
-                browser.find_element_by_xpath('//button[@id="didomi-notice-agree-button"]').click()
-            except:
-                pass
-            browser.find_element_by_xpath('//*[@id="telefono"]').send_keys(number)
-            time.sleep(2)
-            try:
-                browser.find_element_by_xpath('/html/body/div[1]/section/section/form/div[2]/div/div[2]/a').click() # Buttom 1
-            except:
-                browser.find_element_by_xpath('/html/body/div[3]/section/section/form/div[2]/div/div[2]/a').click() # Buttom 2
-            time.sleep(3)
-            print('Linea Directa: OK')
-        except KeyboardInterrupt:
-            browser.close()
-            quit()
-        except:
-            print('Linea Directa: Skipeado (ERROR)')
-
-
         #Telecable
         try:
             browser.get('http://marcador-c2c.alisys.net/telecablec2c_v2/c2c.php')
@@ -481,23 +399,6 @@ def main():
             quit()
         except:
             print('Selectra: Skipeado (ERROR)')
-
-        #Iberdrola
-        try:
-            browser.get('https://www.iberdrola.es/')
-            time.sleep(4)
-            browser.find_element_by_xpath('//*[@id="onetrust-accept-btn-handler"]').click() #Cookies
-            time.sleep(2)
-            browser.find_element_by_xpath('//*[@id="telf-lc-header"]').send_keys(number)
-            browser.find_element_by_xpath('/html/body/div[1]/main/div[2]/section[1]/div[2]/div/div/div[2]/form/div[2]/label').click()
-            browser.find_element_by_xpath('/html/body/div[1]/main/div[2]/section[1]/div[2]/div/div/div[2]/div/button/span').click()
-            time.sleep(3)
-            print('Iberdrola: OK')
-        except KeyboardInterrupt:
-            browser.close()
-            quit()
-        except:
-            print('Iberdrola: Skipeado (ERROR)')
 
         #proyectosyseguros
         try:
@@ -594,26 +495,6 @@ def main():
         except:
             print('homeserve: Skipeado (ERROR)')
 
-        #clinicaboccio
-        try:
-            browser.get('https://www.clinicaboccio.com/pide-cita/')
-            time.sleep(3)
-            try:
-                browser.find_element_by_xpath('/html/body/div[1]/div/div[6]/button[1]').click() #Cokies
-            except:
-                pass
-            browser.find_element_by_xpath('//*[@id="input_5_1"]').send_keys(name)
-            browser.find_element_by_xpath('//*[@id="input_5_4"]').send_keys(number)
-            browser.find_element_by_xpath('//*[@id="input_5_5_1"]').click()
-            browser.find_element_by_xpath('//*[@id="gform_submit_button_5"]').click()
-            time.sleep(2)
-            print('Clinica Boccio: OK')
-        except KeyboardInterrupt:
-            browser.close()
-            quit()
-        except:
-            print('Clinica Boccio: Skipeado (ERROR)')
-
         #pontgrup
         try:
             browser.get('https://www.pontgrup.com/contacto/')
@@ -655,49 +536,6 @@ def main():
             quit()
         except:
             print('ElPaso2000: Skipeado (ERROR)')
-
-        #centrodermatologicoestetico
-        try:
-            browser.get('https://www.centrodermatologicoestetico.com/te-llamamos/')
-            time.sleep(3)
-            try:
-                browser.find_element_by_xpath('//*[@id="cookie_action_close_header"]').click() #Cookies
-            except:
-                pass
-            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/input[5]').send_keys(name)
-            browser.find_element_by_xpath('//*[@id="international_PhoneNumber_countrycode"]').send_keys(number)
-            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/input[7]').send_keys(email)
-            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/div/div/div/input').click()
-            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/button').click()
-            time.sleep(2)
-            print('centrodermatologicoestetico: OK')
-        except KeyboardInterrupt:
-            browser.close()
-            quit()
-        except:
-            print('centrodermatologicoestetico: Skipeado (ERROR)')
-
-        #generali
-        try:
-            browser.get('https://www.generali.es/blog/tuasesorsalud/solicitar-informacion/')
-            time.sleep(3)
-            browser.find_element_by_xpath('//*[@id="onetrust-accept-btn-handler"]').click()
-            time.sleep(2)
-            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[1]/div[2]/label').click()
-            browser.find_element_by_xpath('//*[contains(@id,"email")]').send_keys(email)
-            browser.find_element_by_xpath('//*[contains(@id,"firstname")]').send_keys(name)
-            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[3]/div[2]/div/form/div[3]/div[1]/div/select/option[2]').click()
-            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[3]/div[2]/div/form/div[3]/div[2]/div/select/option[2]').click()
-            browser.find_element_by_xpath('//*[contains(@id,"phone")]').send_keys(number)
-            browser.find_element_by_xpath('//*[contains(@id,"autorizacion_ofertas_comerciales")]').send_keys(number)
-            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[3]/div[2]/div/form/div[16]/div[2]/input').click()
-            time.sleep(5)
-            print('Generali: OK')
-        except KeyboardInterrupt:
-            browser.close()
-            quit()
-        except:
-            print('Generali: Skipeado (ERROR)')
 
         #regal
         try:
