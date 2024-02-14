@@ -7,7 +7,8 @@
 #####     sudo git clone https://github.com/hectoruelo/PerubianBot.git
 ##### WORKDIR PerubianBot
 ##### RUN sudo pip3 install -r requirements.txt 
-
+##### CMD ["/usr/bin/nohup", "/usr/sbin/tor", "&"]
+##### CMD ["/usr/bin/python3", "perubian-tor.py"]
 
 ## docker run
 ##### docker run -itd \
