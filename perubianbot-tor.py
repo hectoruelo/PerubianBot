@@ -20,6 +20,8 @@ from os import system
 
 version = 'Beta 2.0'
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# Desactiva todos los mensajes de log.
+logging.getLogger().setLevel(100)  # Un nivel superior a CRITICAL.
 global debug
 debug = 0
 
@@ -104,6 +106,7 @@ def formulario():
     prefijos = ('6', '8', '7', '9')
     if debug == 1:
         logging.debug("Modo debug activado.")
+        logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
         print(perubian)
         global number, name, surname
         number, name, surname, email = '666666666', 'Piter', 'Grifin', 'uhieor43@gmail.com'
