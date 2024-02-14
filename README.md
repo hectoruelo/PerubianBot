@@ -8,7 +8,6 @@
 ##### WORKDIR PerubianBot
 ##### RUN sudo pip3 install -r requirements.txt 
 ##### RUN tor & 
-##### RUN python3 perubianbot-tor.py
 
 ## docker run
 ##### docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" perubian
