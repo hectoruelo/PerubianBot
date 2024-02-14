@@ -10,4 +10,9 @@
 ##### RUN nohup tor & 
 
 ## docker run
-##### docker run -d -p 4444:4444 -p 7900:7900 --shm-size="2g" perubian
+##### docker run -itd --rm \
+##### -p 4444:4444 \
+##### -p 7900:7900 \
+##### --shm-size="2g" \
+##### --name perubianbot \
+##### perubian
