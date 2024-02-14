@@ -9,7 +9,7 @@
 ##### WORKDIR PerubianBot
 ##### RUN sudo pip3 install -r requirements.txt 
 ##### CMD ["nohup", "tor", "&"]
-##### CMD ["python3", "perubian-tor.py"]
+##### CMD ["python3", "perubianbot-tor.py"]
 
 ## docker run
 ##### docker run -itd \
