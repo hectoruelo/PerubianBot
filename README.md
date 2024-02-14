@@ -8,7 +8,6 @@
 ##### WORKDIR PerubianBot
 ##### RUN sudo pip3 install -r requirements.txt 
 ##### RUN nohup tor & 
-##### RUN /usr/bin/python3 perubianbot-tor.py 
 
 ## docker run
 ##### docker run -itd --rm \
