@@ -1,4 +1,4 @@
-##### ## dockerfile:
+## dockerfile:
 
 ##### FROM selenium/standalone-firefox:4.17.0-20240123
 ##### ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
