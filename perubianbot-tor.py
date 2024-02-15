@@ -1,5 +1,6 @@
 import logging
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service as FirefoxService
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.proxy import Proxy, ProxyType
@@ -13,15 +14,16 @@ from consolemenu import *
 from consolemenu.items import *
 import signal
 import sys
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
+#warnings.filterwarnings("ignore", category=DeprecationWarning) 
 import time
 import os
 from os import system
 
 version = 'Beta 2.0'
+service = 0
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 # Desactiva todos los mensajes de log.
-logging.getLogger().setLevel(100)  # Un nivel superior a CRITICAL.
+#logging.getLogger().setLevel(100)  # Un nivel superior a CRITICAL.
 global debug
 debug = 0
 
@@ -39,10 +41,9 @@ ______               _     _               _____  _____
 
 menu = ConsoleMenu(Fore.YELLOW + perubian, "Seleccione un modo"+ Style.RESET_ALL)
 
-
 #Firefox Configuration
 def firefoxsetup():
-    global binary, profile, PATH_TO_DEV_NULL
+    global binary, options, PATH_TO_DEV_NULL 
     if os.name == 'nt':  # Windows
         binary = 'C:\\Program Files\\Mozilla Firefox\\firefox.exe'
         PATH_TO_DEV_NULL = 'nul'
@@ -52,17 +53,20 @@ def firefoxsetup():
     else:
         binary = '/usr/bin/firefox'
         PATH_TO_DEV_NULL = '/dev/null'
-    profile = webdriver.FirefoxProfile()
-    profile.set_preference("media.autoplay.default", 0)
-    profile.accept_untrusted_certs = True
-    profile.set_preference("media.volume_scale", "0.0")
+    
+    options = Options()
+    options.add_argument("--headless")
+    options.set_preference("media.autoplay.default", 0)
+    options.accept_untrusted_certs = True
+    options.set_preference("media.volume_scale", "0.0")
     
     # Configuración para usar Tor como proxy SOCKS
-    profile.set_preference("network.proxy.type", 1)  # Manual proxy configuration
-    profile.set_preference("network.proxy.socks", "127.0.0.1")  # Dirección IP del proxy SOCKS (Tor)
-    profile.set_preference("network.proxy.socks_port", 9050)  # Puerto del proxy SOCKS (Tor)
-    profile.set_preference("network.proxy.socks_version", 5)  # Versión SOCKS (Tor usa SOCKS5)
-    profile.set_preference("network.proxy.socks_remote_dns", True)  # Para que las solicitudes DNS pasen también por Tor
+    options.set_preference("network.proxy.type", 1)  # Manual proxy configuration
+    options.set_preference("network.proxy.socks", "127.0.0.1")  # Dirección IP del proxy SOCKS (Tor)
+    options.set_preference("network.proxy.socks_port", 9050)  # Puerto del proxy SOCKS (Tor)
+    options.set_preference("network.proxy.socks_version", 5)  # Versión SOCKS (Tor usa SOCKS5)
+    options.set_preference("network.proxy.socks_remote_dns", True)  # Para que las solicitudes DNS pasen también por Tor
+    
 
 #Limpiar Consola
 def clear_console():
@@ -154,12 +158,14 @@ def main():
     global interrupted
     while not interrupted:
         firefoxsetup()
-        global browser
+        global browser , service
         if getattr(sys, 'frozen', False):
             geckodriver_path = os.path.join(sys._MEIPASS, 'geckodriver')
+            service = FirefoxService(executable_path=geckodriver_path, log_path=PATH_TO_DEV_NULL)
         else:
             geckodriver_path = 'geckodriver'
-        browser = webdriver.Firefox(firefox_binary=binary, executable_path = geckodriver_path, firefox_profile=profile, service_log_path=PATH_TO_DEV_NULL)
+            browser = webdriver.Firefox(options=options, service=service)
+            service = FirefoxService(executable_path=geckodriver_path, log_path=PATH_TO_DEV_NULL)
 
         # Visita la página de verificación de Tor
         browser.get("https://check.torproject.org")
@@ -196,9 +202,9 @@ def main():
             time.sleep(1)
             browser.find_element_by_xpath('/html/body/div[2]/main/div[6]/div/div/span/div/div/div/div/div[1]/div[1]/div[2]/form[1]/div/div[10]/button/span[1]').click()
             time.sleep(8)
-            print('Vodafone: OK')
+            print(Fore.GREEN+  'Vodafone: OK' + Style.RESET_ALL)
         except:
-            print('Vodafone: Skipeado (ERROR)')
+            print(Fore.RED +  'Vodafone: Skipeado (ERROR)' + Style.RESET_ALL) 
 
         #euroinnova
         if interrupted:
@@ -595,4 +601,3 @@ menu.append_item(submenu_item)
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, lambda sig, frame: handle_interrupt(browser))
-    menu.show()
