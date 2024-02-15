@@ -4,10 +4,10 @@
 ##### ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ##### ARG DEBIAN_FRONTEND=noninteractive
 ##### RUN sudo apt-get update && \
-#####     sudo apt-get install -y python3 python3-pip git tor selenium webdriver-manager && \
-#####     sudo git clone https://github.com/hectoruelo/PerubianBot.git
+##### sudo apt-get install -y python3 python3-pip git tor && \
+##### sudo git clone https://github.com/hectoruelo/PerubianBot.git
 ##### WORKDIR PerubianBot
-##### RUN sudo pip3 install -r requirements.txt 
+##### RUN sudo pip3 install -r requirements.txt
 ##### CMD ["tor"]
 
 ## docker run
