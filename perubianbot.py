@@ -34,6 +34,7 @@ menu = ConsoleMenu(Fore.YELLOW + perubian, "Seleccione un modo"+ Style.RESET_ALL
 def verificar_conexion_tor():
     try:
         # Hacer una petición a la API para obtener la dirección IP actual
+
         response = requests.get('https://api.ipify.org', proxies=dict(http='socks5://127.0.0.1:9050', https='socks5://127.0.0.1:9050'))
         ip_actual = response.text
         print(Fore.YELLOW + "IP actual a través de Tor: " + ip_actual + Style.RESET_ALL)
@@ -49,7 +50,7 @@ def firefoxsetup():
     path_to_geckodriver = '/usr/bin/geckodriver'
     global options
     options = Options()
-    options.add_argument("--headless")  # Ejecutar Firefox en modo headless
+    # options.add_argument("--headless")  # Ejecutar Firefox en modo headless
     options.accept_insecure_certs = True  # Aceptar certificados inseguros directamente en las Options
     
     # Configurar preferencias directamente en las Options
@@ -94,7 +95,7 @@ def pregunta_estilizada(prompt, datos_previos='', email='', validacion=None):
             else:
                 print(Fore.RED + "Entrada inválida, por favor intente de nuevo." + Style.RESET_ALL)
         except EOFError:
-            exit(0)
+                exit(0)
     
     # Agregar el correo electrónico a datos_previos si se proporciona
     if email:
@@ -142,6 +143,7 @@ def handle_interrupt(browser):
     print("Navegador cerrado. Volviendo al menú principal...")
 
 def main():
+    print ("Entro al main")
     global interrupted
     if not verificar_conexion_tor():
         print(Fore.RED + "Conexión a Tor fallida. Interrumpiendo ejecución." + Style.RESET_ALL)
@@ -576,8 +578,7 @@ def main():
         except:
             print(Fore.RED + "emagister: (ERROR)" + Style.RESET_ALL)
 
-        #mfollanaortodoncia
-        print(Fore.YELLOW + "MFOLLANA ORTODONCIA" + Style.RESET_ALL) 
+ #mfollanaortodoncia
         try:
             browser.get('https://www.mfollanaortodoncia.com/contactar/')
             time.sleep(2)
@@ -588,6 +589,195 @@ def main():
             browser.find_element_by_xpath('/html/body/div[2]/div[2]/main/div/section/div/div/div[2]/div/div/div/div[2]/form/div[1]/ul/li[3]/div/div/select/option[1]').click()
             browser.find_element_by_xpath('//*[@id="input_1_5_1"]').click()
             browser.find_element_by_xpath('//*[@id="gform_submit_button_1"]').click()
-            print(Fore.GREEN + "mfollanaortodoncia: OK'" + Style.RESET_ALL)
+            print('mfollanaortodoncia: OK')
         except KeyboardInterrupt:
             browser.close()
+            quit()
+        except:
+            print('mfollanaortodoncia: Skipeado (ERROR)')
+
+        #homeserve
+        try:
+            browser.get('https://www.homeserve.es/servicios-reparaciones/fontaneros')
+            time.sleep(3)
+            try:
+                browser.find_element_by_xpath('/html/body/div[2]/div[2]/div/div[2]/div[3]/div/button').click() #Cookies
+            except:
+                pass
+            time.sleep(1)
+            browser.find_element_by_xpath('/html/body/main/section[1]/div[2]/div[2]/div[1]/div[1]/form/div[2]/select/option[2]').click()
+            browser.find_element_by_xpath('/html/body/main/section[1]/div[2]/div[2]/div[1]/div[1]/form/div[5]/input[1]').send_keys(name)
+            browser.find_element_by_xpath('/html/body/main/section[1]/div[2]/div[2]/div[1]/div[1]/form/div[5]/input[2]').send_keys(surname)
+            browser.find_element_by_xpath('/html/body/main/section[1]/div[2]/div[2]/div[1]/div[1]/form/div[6]/input[1]').send_keys(number)
+            browser.find_element_by_xpath('/html/body/main/section[1]/div[2]/div[2]/div[1]/div[1]/form/div[6]/input[2]').send_keys(email)
+            browser.find_element_by_xpath('/html/body/main/section[1]/div[2]/div[2]/div[1]/div[1]/form/div[7]/input').click()
+            browser.find_element_by_xpath('/html/body/main/section[1]/div[2]/div[2]/div[1]/div[1]/form/div[9]/button').click()
+            time.sleep(1)
+            print('homeserve: OK')
+        except KeyboardInterrupt:
+            browser.close()
+            quit()
+        except:
+            print('homeserve: Skipeado (ERROR)')
+
+        #clinicaboccio
+        try:
+            browser.get('https://www.clinicaboccio.com/pide-cita/')
+            time.sleep(3)
+            try:
+                browser.find_element_by_xpath('/html/body/div[1]/div/div[6]/button[1]').click() #Cokies
+            except:
+                pass
+            browser.find_element_by_xpath('//*[@id="input_5_1"]').send_keys(name)
+            browser.find_element_by_xpath('//*[@id="input_5_4"]').send_keys(number)
+            browser.find_element_by_xpath('//*[@id="input_5_5_1"]').click()
+            browser.find_element_by_xpath('//*[@id="gform_submit_button_5"]').click()
+            time.sleep(2)
+            print('Clinica Boccio: OK')
+        except KeyboardInterrupt:
+            browser.close()
+            quit()
+        except:
+            print('Clinica Boccio: Skipeado (ERROR)')
+
+        #pontgrup
+        try:
+            browser.get('https://www.pontgrup.com/contacto/')
+            time.sleep(3)
+            try:
+                browser.find_element_by_xpath('/html/body/div[3]/div[2]/button[2]').click() #Cookies
+            except:
+                pass
+            browser.find_element_by_xpath('/html/body/div[1]/div[2]/div/div/section[2]/div/div/div/div[1]/div/div/div/div/a/span/span[2]').click()
+            time.sleep(1)
+            browser.find_element_by_xpath('//*[@id="nombre-contacto"]').send_keys(name)
+            browser.find_element_by_xpath('//*[@id="telefono-contacto"]]').send_keys(number)
+            browser.find_element_by_xpath('//*[@id="terminos-contacto"]').click()
+            browser.find_element_by_xpath('//*[@id="btn-submit-contacto"]').click()
+            time.sleep(2)
+            print('PontGrup: OK')
+        except KeyboardInterrupt:
+            browser.close()
+            quit()
+        except:
+            print('PontGrup: Skipeado (ERROR)')
+
+        #ElPaso2000
+        try:
+            browser.get('https://www.elpaso2000.com/te-llamamos/')
+            time.sleep(3)
+            try:
+                browser.find_element_by_xpath('//*[@id="elpaso-button-accept"]').click() #Cookies
+            except:
+                pass
+            browser.find_element_by_xpath('/html/body/div[2]/div[1]/div/main/div/div[1]/div[1]/div[1]/div[2]/form/div[1]/input').send_keys(number)
+            browser.find_element_by_xpath('/html/body/div[2]/div[1]/div/main/div/div[1]/div[1]/div[1]/div[2]/form/label/span').click()
+            time.sleep(1)
+            browser.find_element_by_xpath('/html/body/div[2]/div[1]/div/main/div/div[1]/div[1]/div[1]/div[2]/form/div[3]/button/span').click()
+            time.sleep(2)
+            print('ElPaso2000: OK')
+        except KeyboardInterrupt:
+            browser.close()
+            quit()
+        except:
+            print('ElPaso2000: Skipeado (ERROR)')
+
+        #centrodermatologicoestetico
+        try:
+            browser.get('https://www.centrodermatologicoestetico.com/te-llamamos/')
+            time.sleep(3)
+            try:
+                browser.find_element_by_xpath('//*[@id="cookie_action_close_header"]').click() #Cookies
+            except:
+                pass
+            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/input[5]').send_keys(name)
+            browser.find_element_by_xpath('//*[@id="international_PhoneNumber_countrycode"]').send_keys(number)
+            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/input[7]').send_keys(email)
+            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/div/div/div/input').click()
+            browser.find_element_by_xpath('/html/body/main/div/div[1]/section/div[2]/div[1]/div/div[4]/div/form/button').click()
+            time.sleep(2)
+            print('centrodermatologicoestetico: OK')
+        except KeyboardInterrupt:
+            browser.close()
+            quit()
+        except:
+            print('centrodermatologicoestetico: Skipeado (ERROR)')
+
+        #generali
+        try:
+            browser.get('https://www.generali.es/blog/tuasesorsalud/solicitar-informacion/')
+            time.sleep(3)
+            browser.find_element_by_xpath('//*[@id="onetrust-accept-btn-handler"]').click()
+            time.sleep(2)
+            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[1]/div[2]/label').click()
+            browser.find_element_by_xpath('//*[contains(@id,"email")]').send_keys(email)
+            browser.find_element_by_xpath('//*[contains(@id,"firstname")]').send_keys(name)
+            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[3]/div[2]/div/form/div[3]/div[1]/div/select/option[2]').click()
+            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[3]/div[2]/div/form/div[3]/div[2]/div/select/option[2]').click()
+            browser.find_element_by_xpath('//*[contains(@id,"phone")]').send_keys(number)
+            browser.find_element_by_xpath('//*[contains(@id,"autorizacion_ofertas_comerciales")]').send_keys(number)
+            browser.find_element_by_xpath('/html/body/div[3]/div[2]/section[1]/div/section[2]/div/main/div/div/div/div/form/div[1]/div[3]/div[2]/div/form/div[16]/div[2]/input').click()
+            time.sleep(5)
+            print('Generali: OK')
+        except KeyboardInterrupt:
+            browser.close()
+            quit()
+        except:
+            print('Generali: Skipeado (ERROR)')
+
+        #regal
+        try:
+            browser.get('https://te-llamamos.regal.es/user-details')
+            time.sleep(3)
+            browser.find_element_by_xpath('//input[@id="primaryPhoneInput"][1]').send_keys(number)
+            browser.find_element_by_xpath('//input[@id="primaryPhoneInput"][2]').send_keys(number)
+            browser.find_element_by_xpath('//*[@id="continueButton"]')
+            time.sleep(5)
+            print('Regal: OK')
+        except KeyboardInterrupt:
+            browser.close()
+            quit()
+        except:
+            print('Regal: Skipeado (ERROR)')
+
+        if repeat == 1:
+            browser.close()
+            print('Repeat ON')
+        else:
+            browser.quit()
+            break
+
+#Menu
+def modo_automatico():
+    print('Activando Modo automatico...')
+    time.sleep(1)
+    formulario()
+    main()
+
+def modo_porculero():
+    print("MODO NO DISPONIBLE")
+    time.sleep(2)
+
+def modo_nocturno():
+    print("MODO NO DISPONIBLE")
+    time.sleep(2)
+
+
+submenu_selection_menu = SelectionMenu(["subitem1", "subitem2", "subitem3"], title="Modo Contrareembolso")
+submenu_item = SubmenuItem("Modo Contrareembolso", submenu=submenu_selection_menu, menu=menu)
+
+# Crear los ítems del menú
+item1 = FunctionItem("Modo Automático", modo_automatico)
+item2 = FunctionItem("Modo Porculero", modo_porculero)
+item3 = FunctionItem("Modo Nocturno", modo_nocturno)
+
+# Añadir los ítems al menú
+menu.append_item(item1)
+menu.append_item(item2)
+menu.append_item(item3)
+menu.append_item(submenu_item)
+
+
+if __name__ == "__main__":
+    signal.signal(signal.SIGINT, lambda sig, frame: handle_interrupt(browser))
+    menu.show()     
