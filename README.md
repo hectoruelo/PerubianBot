@@ -5,6 +5,7 @@
 ##### ARG DEBIAN_FRONTEND=noninteractive
 ##### RUN sudo apt-get update && \
 ##### sudo apt-get install -y python3 python3-pip git tor && \
+##### pip install --upgrade selenium \
 ##### sudo git clone https://github.com/hectoruelo/PerubianBot.git
 ##### WORKDIR PerubianBot
 ##### RUN sudo pip3 install -r requirements.txt
