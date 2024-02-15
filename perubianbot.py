@@ -22,7 +22,7 @@ from selenium.webdriver.firefox.service import Service
 version = 'Beta 2.0'
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 global debug
-debug = 1
+debug = 0
 
 #VARIABLES
 global perubian
@@ -48,9 +48,10 @@ def verificar_conexion_tor():
 #Firefox Configuration
 def firefoxsetup():
     path_to_geckodriver = '/usr/bin/geckodriver'
+    path_to_log = '/tmp/geckodriver.log'
     global options
     options = Options()
-    # options.add_argument("--headless")  # Ejecutar Firefox en modo headless
+    options.add_argument("--headless")  # Ejecutar Firefox en modo headless
     options.accept_insecure_certs = True  # Aceptar certificados inseguros directamente en las Options
     
     # Configurar preferencias directamente en las Options
@@ -70,7 +71,7 @@ def firefoxsetup():
     options.set_preference("network.proxy.socks_remote_dns", True)  # DNS queries a través de Tor
      
     global service
-    service = Service(executable_path=path_to_geckodriver)
+    service = Service(executable_path=path_to_geckodriver, service_log_path=path_to_log)
     global browser
     browser = webdriver.Firefox(service=service, options=options)
 
@@ -143,7 +144,6 @@ def handle_interrupt(browser):
     print("Navegador cerrado. Volviendo al menú principal...")
 
 def main():
-    print ("Entro al main")
     global interrupted
     if not verificar_conexion_tor():
         print(Fore.RED + "Conexión a Tor fallida. Interrumpiendo ejecución." + Style.RESET_ALL)
@@ -579,6 +579,8 @@ def main():
             print(Fore.RED + "emagister: (ERROR)" + Style.RESET_ALL)
 
  #mfollanaortodoncia
+        print(Fore.YELLOW + "MFOLLARANAORTODONCIA" + Style.RESET_ALL) 
+
         try:
             browser.get('https://www.mfollanaortodoncia.com/contactar/')
             time.sleep(2)
@@ -597,6 +599,7 @@ def main():
             print('mfollanaortodoncia: Skipeado (ERROR)')
 
         #homeserve
+        print(Fore.YELLOW + "HOMESERVE" + Style.RESET_ALL) 
         try:
             browser.get('https://www.homeserve.es/servicios-reparaciones/fontaneros')
             time.sleep(3)
@@ -621,6 +624,7 @@ def main():
             print('homeserve: Skipeado (ERROR)')
 
         #clinicaboccio
+        print(Fore.YELLOW + "CLINICA BOCCIO" + Style.RESET_ALL) 
         try:
             browser.get('https://www.clinicaboccio.com/pide-cita/')
             time.sleep(3)
@@ -641,6 +645,7 @@ def main():
             print('Clinica Boccio: Skipeado (ERROR)')
 
         #pontgrup
+        print(Fore.YELLOW + "PONTGRUP" + Style.RESET_ALL) 
         try:
             browser.get('https://www.pontgrup.com/contacto/')
             time.sleep(3)
@@ -663,6 +668,7 @@ def main():
             print('PontGrup: Skipeado (ERROR)')
 
         #ElPaso2000
+        print(Fore.YELLOW + "ELPASO 2000" + Style.RESET_ALL) 
         try:
             browser.get('https://www.elpaso2000.com/te-llamamos/')
             time.sleep(3)
@@ -683,6 +689,7 @@ def main():
             print('ElPaso2000: Skipeado (ERROR)')
 
         #centrodermatologicoestetico
+        print(Fore.YELLOW + "CENTRO DERMATOLOGICO ESTETICO" + Style.RESET_ALL) 
         try:
             browser.get('https://www.centrodermatologicoestetico.com/te-llamamos/')
             time.sleep(3)
@@ -704,6 +711,7 @@ def main():
             print('centrodermatologicoestetico: Skipeado (ERROR)')
 
         #generali
+        print(Fore.YELLOW + "GENERALI" + Style.RESET_ALL) 
         try:
             browser.get('https://www.generali.es/blog/tuasesorsalud/solicitar-informacion/')
             time.sleep(3)
@@ -726,6 +734,7 @@ def main():
             print('Generali: Skipeado (ERROR)')
 
         #regal
+        print(Fore.YELLOW + "REGAL" + Style.RESET_ALL) 
         try:
             browser.get('https://te-llamamos.regal.es/user-details')
             time.sleep(3)
