@@ -1,27 +1,21 @@
-import \
-    logging  # Permite hacer seguimiento de eventos en tu aplicación, facilitando la depuración y el diagnóstico de problemas.
+import logging  # Permite hacer seguimiento de eventos en tu aplicación, facilitando la depuración y el diagnóstico de problemas.
 from selenium import webdriver  # Proporciona herramientas para automatizar la interacción con navegadores web.
-from selenium.webdriver.firefox.firefox_binary import \
-    FirefoxBinary  # Permite especificar la ubicación del binario de Firefox para Selenium.
+from selenium.webdriver.firefox.firefox_binary import FirefoxBinary  # Permite especificar la ubicación del binario de Firefox para Selenium.
 from datetime import datetime  # Proporciona funciones para trabajar con fechas y horas.
-import \
-    warnings  # Ofrece una forma de advertir al desarrollador sobre situaciones que no son necesariamente excepciones.
+import warnings  # Ofrece una forma de advertir al desarrollador sobre situaciones que no son necesariamente excepciones.
 import requests  # Permite enviar solicitudes HTTP/1.1 de manera fácil.
 import json  # Facilita la codificación y decodificación de datos en formato JSON.
 import colorama  # Hace posible que la salida de la terminal contenga colores en diferentes plataformas.
-from colorama import Fore, \
-    Style  # Fore permite cambiar el color del texto, y Style ajusta el estilo del texto (como negrita).
+from colorama import Fore, Style  # Fore permite cambiar el color del texto, y Style ajusta el estilo del texto (como negrita).
 from consolemenu import *  # Proporciona funcionalidades para crear menús de consola interactivos.
 from consolemenu.items import *  # Incluye elementos específicos que se pueden agregar a los menús de consola, como FuncItem para funciones.
-import \
-    signal  # Proporciona herramientas para manejar señales de UNIX, permitiendo la interacción con el sistema operativo.
+import signal  # Proporciona herramientas para manejar señales de UNIX, permitiendo la interacción con el sistema operativo.
 import sys  # Ofrece acceso a algunas variables y funciones que interactúan con el intérprete de Python.
 
 warnings.filterwarnings("ignore",
-                        category=DeprecationWarning)  # Configura los avisos para ignorar los avisos de obsolescencia.
+category=DeprecationWarning)  # Configura los avisos para ignorar los avisos de obsolescencia.
 import time  # Ofrece funciones para trabajar con el tiempo, como esperas.
-import \
-    os  # Proporciona una forma de usar funcionalidades dependientes del sistema operativo, como manejar archivos y directorios.
+import os  # Proporciona una forma de usar funcionalidades dependientes del sistema operativo, como manejar archivos y directorios.
 from os import system  # Permite ejecutar comandos del sistema desde Python.
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
